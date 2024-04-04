@@ -1,0 +1,59 @@
+--SQL básico
+--Debe crear 2 tablas nombradas libros y estudiantes y demostrar libremente los
+--siguientes ejercicios
+
+-- Consultas donde utilice COUNT, SUM, AVG, ORDER BY, WHERE, JOIN,
+--UPDATE, DELETE, INSERT
+--NOTA: Incluya las columnas e información pertinentes para que su ejercicio cumpla con
+--lo requerido, se valorara la estructura que defina para las tablas.
+
+--Se crea la tabla libro con sus atributos
+CREATE TABLE Libro (
+    IdLibro INT IDENTITY NOT NULL PRIMARY KEY,
+    Titulo NVARCHAR(100) NOT NULL,
+    Editorial NVARCHAR(100) NOT NULL,
+    Area NVARCHAR(100) NOT NULL
+);
+
+--Se crea la tabla Estudiantes con sus atributos
+CREATE TABLE Estudiantes (
+    IdEstudiante INT IDENTITY NOT NULL PRIMARY KEY, --creamos un id unico en la bd con identity el cual es autoincremental
+    Nombre NVARCHAR(50) NOT NULL,
+    Apellido NVARCHAR(50) NOT NULL,
+    Edad INT,
+    Carrera NVARCHAR(50)
+);
+
+--seleccionamos todos los registros de la tabla libro
+SELECT COUNT(*) FROM Libro;
+
+--sumamos la edad de todos los estudiantes.
+SELECT SUM(Edad) FROM Estudiantes;
+
+--Calculamos el priomedio de las edades de los estudiantes
+SELECT AVG(Edad) FROM Estudiantes;
+
+--Ordenamos en orden alfabetico los libros deacuerdo al titulo
+SELECT Titulo FROM Libro ORDER BY Titulo;
+
+-- seleccionamos todos los estudiantes cuaya edad sea mayor a 20 en este ejemplo
+SELECT * FROM Estudiantes WHERE Edad > 25;
+
+-- seleccioonamos  las columnas Titulo de la tabla “Libro”, Nombre y Apellido de la tabla “Estudiantes
+--tabla “Libro” la renombramos como “L”
+--realizamos la relacion entre prestamos (una tabla intermedia ) con libros por el idLibro
+--realizamos la relacion entre prestamos ( tabla intermedia) entre estudiantes con el idEstudiante
+--realizamos una lista de libros junto con los nombres y apellidos de los estudiantes que realizaron préstamos de libros
+SELECT L.Titulo, E.Nombre, E.Apellido
+FROM Libro L
+INNER JOIN Prestamo P ON L.IdLibro = P.IdLibro
+INNER JOIN Estudiantes E ON P.IdEstudiante = E.IdEstudiante;
+
+-- le damos el valor a la columna area donde el idLibro sea == a 1.
+UPDATE Libro SET Area = 'Ciencia Ficción' WHERE IdLibro = 1;
+
+--Eliminamos de la tabla estudiantes el estudiante con el idEstudiante == 3
+DELETE FROM Estudiantes WHERE IdEstudiante = 3;
+
+--insertamos un libro con sus parametros y con values en el mismo orden ponemos el valor de cada columna.
+INSERT INTO Libro (Titulo, Editorial, Area) VALUES ('El Gran Gatsby', 'Editorial XYZ', 'Novela');
