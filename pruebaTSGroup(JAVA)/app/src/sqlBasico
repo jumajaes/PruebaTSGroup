@@ -9,19 +9,19 @@
 
 --Se crea la tabla libro con sus atributos
 CREATE TABLE Libro (
-    IdLibro INT IDENTITY NOT NULL PRIMARY KEY,
-    Titulo NVARCHAR(100) NOT NULL,
-    Editorial NVARCHAR(100) NOT NULL,
-    Area NVARCHAR(100) NOT NULL
-);
+    IdLibro INT NOT NULL PRIMARY KEY  AUTO_INCREMENT,
+    Titulo char(100) NOT NULL,
+    Editorial CHAR(100) NOT NULL,
+    Area CHAR(100)  NOT NULL
+    )
 
 --Se crea la tabla Estudiantes con sus atributos
 CREATE TABLE Estudiantes (
-    IdEstudiante INT IDENTITY NOT NULL PRIMARY KEY, --creamos un id unico en la bd con identity el cual es autoincremental
-    Nombre NVARCHAR(50) NOT NULL,
-    Apellido NVARCHAR(50) NOT NULL,
+    IdEstudiante INT NOT NULL PRIMARY KEY  AUTO_INCREMENT, --creamos un id unico en la bd el cual es autoincremental
+    Nombre CHAR(50) NOT NULL,
+    Apellido CHAR(50) NOT NULL,
     Edad INT,
-    Carrera NVARCHAR(50)
+    Carrera CHAR(50)
 );
 
 --seleccionamos todos los registros de la tabla libro
